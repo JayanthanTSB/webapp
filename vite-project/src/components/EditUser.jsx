@@ -28,7 +28,7 @@ export const EditUser = ({ id, name, email, dob, mobile, sex, address }) => {
     event.preventDefault();
     try {
       const res = await axios.put(
-        `https://sample-deploy-pgaw.onrender.com/${id}`,
+        `https://sample-deploy-pgaw.onrender.com/users/${id}`,
         data
       );
       console.log("Fetched data:", res.data);
