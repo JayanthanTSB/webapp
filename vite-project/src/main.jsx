@@ -5,7 +5,7 @@ import App from "./App.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId="993849645069-gosqu0l8k7jgsjp8it21t2ggdao0deoa.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="694200651230-dm6tfpbg5os334bhh601ebk1h0jgvnl1.apps.googleusercontent.com">
       <App />
     </GoogleOAuthProvider>
     ;
