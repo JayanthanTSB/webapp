@@ -1,18 +1,8 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 
-export const Googleauth = () => {
-  const [Data, setdata] = useState({
-    name: "",
-    email: "",
-    dob: "",
-    mobile: "",
-    sex: "",
-    address: "",
-    type: "",
-  });
-
+export const Googleauth = ({ getData }) => {
   const login = useGoogleLogin({
     onSuccess: async (response) => {
       try {
@@ -33,7 +23,6 @@ export const Googleauth = () => {
           address: "",
           type: "G",
         };
-        setdata(userData);
         await adduser(userData);
       } catch (err) {
         console.log(err);
@@ -47,7 +36,7 @@ export const Googleauth = () => {
         `https://sample-deploy-pgaw.onrender.com/users`,
         Data
       );
-      window.location.reload();
+      getData();
       console.log("adduser to db", response.data);
     } catch (err) {
       console.error("Error adding user:", err);

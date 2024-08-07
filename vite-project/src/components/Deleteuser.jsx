@@ -14,7 +14,7 @@ export const Deleteuser = (props) => {
         .then((res) => {
           console.log("Deleted data :", props.userId);
           console.log("Response data:", res.data);
-          window.location.reload();
+          props.getData();
         })
         .catch((error) => {
           console.error("Error deleting user:", error);
@@ -32,3 +32,5 @@ export const Deleteuser = (props) => {
     </button>
   );
 };
+
+export default Deleteuser;

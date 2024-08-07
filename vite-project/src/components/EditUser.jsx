@@ -32,7 +32,6 @@ export const EditUser = ({ id, name, email, dob, mobile, sex, address }) => {
         data
       );
       console.log("Fetched data:", res.data);
-      window.location.reload();
     } catch (error) {
       console.error("Error updating user", error);
     }
@@ -163,3 +162,4 @@ export const EditUser = ({ id, name, email, dob, mobile, sex, address }) => {
     </div>
   );
 };
+export default EditUser;

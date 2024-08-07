@@ -1,20 +1,16 @@
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { Deleteuser } from "./Deleteuser";
 import { EditUser } from "./EditUser";
 
-export const DisplayUsers = () => {
-  const [data, setData] = useState([]);
+export const DisplayUsers = ({ data, getData }) => {
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const getData = async () => {
-    await axios.get("https://sample-deploy-pgaw.onrender.com/").then((res) => {
-      setData(res.data.users);
-    });
-  };
-
   console.log(data);
+
+  const handleAddUser = () => {
+    getData();
+  };
 
   useEffect(() => {
     getData();
@@ -68,7 +64,11 @@ export const DisplayUsers = () => {
                       >
                         <i className="bi bi-pencil-square"></i>
                       </button>
-                      <Deleteuser userId={users.id} />
+                      <Deleteuser
+                        userId={users.id}
+                        getData={getData}
+                        handleAddUser={handleAddUser}
+                      />
                     </td>
                   </tr>
                 );

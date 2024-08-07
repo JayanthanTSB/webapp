@@ -2,7 +2,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 
-export const AddUser = () => {
+export const AddUser = ({ getData }) => {
   const [data, setData] = React.useState({
     name: "",
     email: "",
@@ -19,11 +19,20 @@ export const AddUser = () => {
       await axios
         .post(`https://sample-deploy-pgaw.onrender.com/users`, data)
         .then((res) => {
-          window.location.reload();
+          getData();
           console.log("adduser to db", res.data);
+          setData({
+            name: "",
+            email: "",
+            dob: "",
+            mobile: "",
+            sex: "",
+            address: "",
+            type: "N",
+          });
         });
     } catch (err) {
-      console.log(error);
+      console.log(err);
     }
   };
   const handledata = (e) => {
@@ -163,9 +172,11 @@ export const AddUser = () => {
                   Cancel
                 </button>
                 <button
-                  type="submit"
+                  onClick={adduser}
+                  type="button"
                   id="addUserButton"
                   className="btn btn-primary"
+                  data-dismiss="modal"
                 >
                   Add User
                 </button>
