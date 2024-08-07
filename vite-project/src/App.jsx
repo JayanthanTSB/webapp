@@ -1,7 +1,7 @@
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { AddUser } from "./components/AddUser";
 import { DisplayUsers } from "./components/DisplayUsers";
@@ -33,7 +33,7 @@ const App = () => {
         <Header />
         <div className="d-flex ">
           <AddUser getData={getData} />
-          <GoogleOAuthProvider clientId="993849645069-gosqu0l8k7jgsjp8it21t2ggdao0deoa.apps.googleusercontent.com">
+          <GoogleOAuthProvider clientId="694200651230-dm6tfpbg5os334bhh601ebk1h0jgvnl1.apps.googleusercontent.com">
             <Googleauth getData={getData} />
           </GoogleOAuthProvider>
         </div>
@@ -53,5 +53,6 @@ const App = () => {
     </>
   );
 };
-// 694200651230-dm6tfpbg5os334bhh601ebk1h0jgvnl1.apps.googleusercontent.com
+// 694200651230-dm6tfpbg5os334bhh601ebk1h0jgvnl1.apps.googleusercontent.com live
+// 993849645069-gosqu0l8k7jgsjp8it21t2ggdao0deoa.apps.googleusercontent.com local
 export default App;
