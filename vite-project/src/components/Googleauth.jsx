@@ -1,6 +1,6 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import React from "react";
+import { React, useEffect } from "react";
 
 export const Googleauth = ({ getData }) => {
   const login = useGoogleLogin({
@@ -29,7 +29,9 @@ export const Googleauth = ({ getData }) => {
       }
     },
   });
-
+  useEffect(() => {
+    getData();
+  }, []);
   const adduser = async (Data) => {
     try {
       const response = await axios.post(

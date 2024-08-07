@@ -12,9 +12,9 @@ export const DisplayUsers = ({ data, getData }) => {
     getData();
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   const handleEditUser = (user) => {
     setSelectedUser(user);
