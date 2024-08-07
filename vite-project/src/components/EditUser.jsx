@@ -2,7 +2,16 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 
-export const EditUser = ({ id, name, email, dob, mobile, sex, address }) => {
+export const EditUser = ({
+  id,
+  name,
+  email,
+  dob,
+  mobile,
+  sex,
+  address,
+  getData,
+}) => {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -27,11 +36,14 @@ export const EditUser = ({ id, name, email, dob, mobile, sex, address }) => {
   const update = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.put(
-        `https://sample-deploy-pgaw.onrender.com/users/${id}`,
-        data
-      );
-      console.log("Fetched data:", res.data);
+      const res = await axios
+        .put(`https://sample-deploy-pgaw.onrender.com/users/${id}`, data)
+        .then((res) => {
+          getData();
+          console.log(res);
+        });
+
+      // console.log("Fetched data:", res.data);
     } catch (error) {
       console.error("Error updating user", error);
     }
@@ -46,7 +58,7 @@ export const EditUser = ({ id, name, email, dob, mobile, sex, address }) => {
               Update User
             </h1>
           </div>
-          <form id="userForm" onSubmit={update}>
+          <form id="userForm">
             <div className="modal-body">
               <div className="container">
                 <div className="input-group mb-3">
@@ -149,7 +161,9 @@ export const EditUser = ({ id, name, email, dob, mobile, sex, address }) => {
                 Cancel
               </button>
               <button
-                type="submit"
+                type="button"
+                data-dismiss="modal"
+                onClick={update}
                 id="addUserButton"
                 className="btn btn-primary"
               >

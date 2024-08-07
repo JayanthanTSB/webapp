@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Deleteuser } from "./Deleteuser";
 import { EditUser } from "./EditUser";
 
@@ -75,7 +75,7 @@ export const DisplayUsers = ({ data, getData }) => {
               })}
           </tbody>
         </table>
-        {selectedUser && <EditUser {...selectedUser} />}
+        {selectedUser && <EditUser {...selectedUser} getData={getData} />}
       </div>
     </>
   );
