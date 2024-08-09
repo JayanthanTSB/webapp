@@ -38,10 +38,19 @@ export const Googleauth = ({ getData }) => {
         `https://sample-deploy-pgaw.onrender.com/users`,
         Data
       );
+
+      console.log("adduser to db", response.request.status);
+      var code = response.status;
+      if (code == 400) {
+        window.alert("User already exist!!!");
+      } else if (code == 200) {
+        window.alert("User added!!!");
+      } else {
+        window.alert("Error!!!");
+      }
       getData();
-      console.log("adduser to db", response.data);
     } catch (err) {
-      console.error("Error adding user:", err);
+      console.error(err);
       window.alert("user already exist!!!");
     }
   };

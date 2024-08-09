@@ -42,8 +42,6 @@ export const EditUser = ({
           getData();
           console.log(res);
         });
-
-      // console.log("Fetched data:", res.data);
     } catch (error) {
       console.error("Error updating user", error);
     }
@@ -83,6 +81,7 @@ export const EditUser = ({
                     name="email"
                     onChange={handleDataChange}
                     required
+                    disabled
                   />
                 </div>
                 <div>
