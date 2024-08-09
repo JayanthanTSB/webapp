@@ -33,7 +33,7 @@ const App = () => {
         <Header />
         <div className="d-flex ">
           <AddUser getData={getData} />
-          <GoogleOAuthProvider clientId="694200651230-dm6tfpbg5os334bhh601ebk1h0jgvnl1.apps.googleusercontent.com">
+          <GoogleOAuthProvider clientId="993849645069-gosqu0l8k7jgsjp8it21t2ggdao0deoa.apps.googleusercontent.com">
             <Googleauth getData={getData} />
           </GoogleOAuthProvider>
         </div>

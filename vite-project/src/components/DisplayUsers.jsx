@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { DownloadTableExcel } from "react-export-table-to-excel";
 import { Deleteuser } from "./Deleteuser";
 import { EditUser } from "./EditUser";
 
@@ -15,19 +16,37 @@ export const DisplayUsers = ({ data, getData }) => {
   const handleEditUser = (user) => {
     setSelectedUser(user);
   };
+  const tableRef = useRef(null);
 
   return (
     <>
       <div className="py-3">
-        <table className="table text-center">
+        <div className=" d-flex justify-content-end ">
+          <DownloadTableExcel
+            filename="users table"
+            sheet="users"
+            currentTableRef={tableRef.current}
+          >
+            <button
+              className="btn btn-dark mx-5 mb-3"
+              style={{ marginTop: "-80px" }}
+            >
+              {" "}
+              Export excel{" "}
+            </button>
+          </DownloadTableExcel>
+        </div>
+        <table className="table text-center" ref={tableRef}>
           <thead>
             <tr>
+              <th style={{ display: "none" }}>id</th>
               <th className="mx-2">Name</th>
               <th className="mx-2">Email</th>
               <th className="mx-2">DOB</th>
               <th className="mx-2">Mobile</th>
               <th className="mx-2">Gender</th>
               <th className="mx-2">Type</th>
+              <th style={{ display: "none" }}>Address</th>
               <th className="mx-2">Action</th>
             </tr>
           </thead>
@@ -45,10 +64,8 @@ export const DisplayUsers = ({ data, getData }) => {
                     <td>{users.dob}</td>
                     <td>{users.mobile}</td>
                     <td className="text-uppercase">{users.sex}</td>
-                    <td className="text-uppercase" style={{ display: "none" }}>
-                      {users.address}
-                    </td>
                     <td className="text-uppercase">{users.type}</td>
+                    <td style={{ display: "none" }}>{users.address}</td>
                     <td className="d-flex">
                       <button
                         className="btn btn-primary"

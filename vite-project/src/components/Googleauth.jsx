@@ -1,6 +1,8 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { React, useEffect } from "react";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Googleauth = ({ getData }) => {
   const login = useGoogleLogin({
@@ -42,23 +44,68 @@ export const Googleauth = ({ getData }) => {
       console.log("adduser to db", response.request.status);
       var code = response.status;
       if (code == 400) {
-        window.alert("User already exist!!!");
+        toast.err(response.data, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       } else if (code == 200) {
-        window.alert("User added!!!");
-      } else {
-        window.alert("Error!!!");
+        toast.success(response.data, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
       getData();
     } catch (err) {
       console.error(err);
-      window.alert("user already exist!!!");
+      toast.error(response.data, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 
   return (
-    <button className="btn btn-outline-dark " onClick={() => login()}>
-      Sign in with Google{" "}
-    </button>
+    <>
+      <button className="btn btn-outline-dark " onClick={() => login()}>
+        Sign in with Google{" "}
+      </button>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
+      {/* Same as */}
+      <ToastContainer />
+    </>
   );
 };
 export default Googleauth;

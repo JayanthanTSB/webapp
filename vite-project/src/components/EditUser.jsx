@@ -81,7 +81,6 @@ export const EditUser = ({
                     name="email"
                     onChange={handleDataChange}
                     required
-                    disabled
                   />
                 </div>
                 <div>
