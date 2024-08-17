@@ -1,6 +1,8 @@
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const AddUser = ({ getData }) => {
   const [data, setData] = React.useState({
@@ -12,14 +14,27 @@ export const AddUser = ({ getData }) => {
     address: "",
     type: "N",
   });
-
   const adduser = async (event) => {
     event.preventDefault();
     try {
       await axios
         .post(`https://sample-deploy-pgaw.onrender.com/users`, data)
         .then((res) => {
+          setTimeout(() => {
+            toast.success("User added", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+            });
+          }, 500);
           getData();
+
           console.log("adduser to db", res.data);
           setData({
             name: "",
@@ -33,6 +48,17 @@ export const AddUser = ({ getData }) => {
         });
     } catch (err) {
       console.log(err);
+      toast.error("Email already exist", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
   const handledata = (e) => {

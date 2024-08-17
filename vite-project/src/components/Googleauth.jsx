@@ -1,7 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { React, useEffect } from "react";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const Googleauth = ({ getData }) => {
@@ -34,6 +34,7 @@ export const Googleauth = ({ getData }) => {
   useEffect(() => {
     getData();
   }, []);
+
   const adduser = async (Data) => {
     try {
       const response = await axios.post(
@@ -41,10 +42,8 @@ export const Googleauth = ({ getData }) => {
         Data
       );
 
-      console.log("adduser to db", response.request.status);
-      var code = response.status;
-      if (code == 400) {
-        toast.err(response.data, {
+      setTimeout(() => {
+        toast.success("User added", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -55,23 +54,11 @@ export const Googleauth = ({ getData }) => {
           theme: "light",
           transition: Bounce,
         });
-      } else if (code == 200) {
-        toast.success(response.data, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-      }
+      }, 500);
       getData();
-    } catch (err) {
-      console.error(err);
-      toast.error(response.data, {
+    } catch (error) {
+      console.error(error);
+      toast.error("User already exist", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -90,21 +77,6 @@ export const Googleauth = ({ getData }) => {
       <button className="btn btn-outline-dark " onClick={() => login()}>
         Sign in with Google{" "}
       </button>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Bounce}
-      />
-      {/* Same as */}
-      <ToastContainer />
     </>
   );
 };

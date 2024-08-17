@@ -1,6 +1,8 @@
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const EditUser = ({
   id,
@@ -41,9 +43,32 @@ export const EditUser = ({
         .then((res) => {
           getData();
           console.log(res);
+          setTimeout(() => {
+            toast.success("User Edited", {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+            });
+          }, 500);
         });
     } catch (error) {
       console.error("Error updating user", error);
+      toast.error("Error updating user", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
 

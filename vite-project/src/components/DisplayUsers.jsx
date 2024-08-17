@@ -1,13 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useRef, useState } from "react";
-import { DownloadTableExcel } from "react-export-table-to-excel";
+import React, { useState } from "react";
 import { Deleteuser } from "./Deleteuser";
 import { EditUser } from "./EditUser";
 
 export const DisplayUsers = ({ data, getData }) => {
   const [selectedUser, setSelectedUser] = useState(null);
-
-  console.log(data);
 
   const handleAddUser = () => {
     getData();
@@ -16,27 +13,11 @@ export const DisplayUsers = ({ data, getData }) => {
   const handleEditUser = (user) => {
     setSelectedUser(user);
   };
-  const tableRef = useRef(null);
 
   return (
     <>
       <div className="py-3">
-        <div className=" d-flex justify-content-end ">
-          <DownloadTableExcel
-            filename="users table"
-            sheet="users"
-            currentTableRef={tableRef.current}
-          >
-            <button
-              className="btn btn-dark mx-5 mb-3"
-              style={{ marginTop: "-80px" }}
-            >
-              {" "}
-              Export excel{" "}
-            </button>
-          </DownloadTableExcel>
-        </div>
-        <table className="table text-center" ref={tableRef}>
+        <table className="table text-center">
           <thead>
             <tr>
               <th style={{ display: "none" }}>id</th>

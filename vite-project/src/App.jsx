@@ -5,19 +5,13 @@ import { React, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { AddUser } from "./components/AddUser";
 import { DisplayUsers } from "./components/DisplayUsers";
+import ExcelExportComponent from "./components/ExcelExportComponent";
 import { Googleauth } from "./components/Googleauth";
 import { Header } from "./components/Header";
 
 const App = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   if (data.length != 0) {
-  //     setLoading(false);
-  //   }
-  // }, []);
 
   const getData = async () => {
     setLoading(true);
@@ -31,11 +25,13 @@ const App = () => {
     <>
       <div className="container">
         <Header />
+
         <div className="d-flex ">
           <AddUser getData={getData} />
           <GoogleOAuthProvider clientId="694200651230-dm6tfpbg5os334bhh601ebk1h0jgvnl1.apps.googleusercontent.com">
             <Googleauth getData={getData} />
           </GoogleOAuthProvider>
+          <ExcelExportComponent />
         </div>
         {loading ? (
           <ClipLoader
